@@ -1,4 +1,4 @@
-# promt_comparator
+ # promt_comparator
 
 **A PyPI-installable tool to compare prompts in RAG systems and identify the most efficient one.**
 
