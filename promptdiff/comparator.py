@@ -1,100 +1,63 @@
 from runner import run_prompt
 from diff_engine import get_diff
 
-def smart_score(output, context, question):
-    score = 0
-    output_lower = output.lower()
-
-    # 1. Context usage
-    for word in context.lower().split():
-        if word in output_lower:
-            score += 1
-
-    # 2. Length (more detailed = better)
-    score += len(output.split()) * 0.05
-
-    # 3. Important keywords (domain logic)
-    keywords = ["rain", "soil", "irrigate", "crop"]
-    for k in keywords:
-        if k in output_lower:
-            score += 2
-
-    # 4. Penalize hallucination (basic)
-    if "i don't know" in output_lower:
-        score -= 2
-
-    return score
-
-def llm_judge(outputs, question, context):
-    judge_prompt = f"""
-You are an evaluator.
-
-Question: {question}
-
-Context:
-{context}
-
-We have these answers:
-{outputs}
-
-Return in this format ONLY:
-
-Best: <number>
-Reason: <short reason>
-Score Breakdown:
-- Relevance: x/10
-- Context Use: x/10
-- Clarity: x/10
-"""
-
-    result = run_prompt(judge_prompt, "", "")
-    return result
-
 def compare_prompts(prompts, question, context, model="mistral"):
-    """
-    Runs multiple prompts and compares outputs
-    """
-
     outputs = []
 
     print("\n🚀 Running Prompt Comparisons...\n")
 
-    # Run all prompts
+    # Run prompts
     for i, prompt in enumerate(prompts):
-        print(f"\n==============================")
-        print(f"🔹 Prompt {i+1}")
-        print(f"==============================")
-
+        print(f"\n🔹 Prompt {i+1}")
         output = run_prompt(prompt, question, context, model)
         outputs.append(output)
-
         print(output)
 
-    # Pairwise diff comparison
-    print("\n\n🧠 DIFF COMPARISON:\n")
-
+    # Diff
+    print("\n🧠 DIFF:\n")
     for i in range(len(outputs)):
         for j in range(i + 1, len(outputs)):
-            print(f"\n--- DIFF (P{i+1} vs P{j+1}) ---")
+            print(f"\n--- P{i+1} vs P{j+1} ---")
             print(get_diff(outputs[i], outputs[j]))
 
-    # Simple scoring (based on context word usage)
-    print("\n\n🏆 SCORING:\n")
+    # 🔥 Smart scoring
+    def smart_score(output):
+        score = 0
+        output_lower = output.lower()
+
+        # dynamic keywords
+        words = (context + " " + question).lower().split()
+        keywords = list(set([w for w in words if len(w) > 3]))
+
+        for k in keywords:
+            if k in output_lower:
+                score += 1.5
+
+        # length control
+        length = len(output.split())
+        score += length * 0.03
+
+        if length > 120:
+            score -= 3
+
+        return score
 
     scores = []
+    print("\n🏆 SCORING:\n")
 
-    for i, output in enumerate(outputs):
-        score = smart_score(output, context, question)
-        scores.append(score)
-
-        print(f"Prompt {i+1} Score: {score:.2f}")
+    for i, out in enumerate(outputs):
+        s = smart_score(out)
+        scores.append(s)
+        print(f"Prompt {i+1}: {s:.2f}")
 
     best_index = scores.index(max(scores))
 
-    print(f"\n✅ BEST PROMPT: Prompt {best_index + 1}")
+    print(f"\n✅ BEST PROMPT: P{best_index+1}")
 
-    # LLM Judge evaluation
-    print("\n🤖 LLM JUDGE RESULT:\n")
-    print(llm_judge(outputs, question, context))
-
-    return outputs
+    # 🔥 RETURN IMPORTANT DATA
+    return {
+        "best_prompt": prompts[best_index],
+        "best_index": best_index,
+        "outputs": outputs,
+        "scores": scores
+    }
