@@ -1,4 +1,4 @@
-# 🔥 promptdiff
+# 🔥 promptdiff-chiru
 
 **Smart prompt comparison & evaluation tool using LLM-as-judge**
 
@@ -16,7 +16,7 @@ Compare multiple prompts side-by-side, get intelligent scoring, AI-powered expla
 ## 📦 Installation
 
 ```bash
-pip install promptdiff
+pip install promptdiff-chiru
 ```
 
 Or from source:
@@ -31,7 +31,7 @@ pip install -e .
 ### Basic Usage
 
 ```python
-from promptdiff import compare_prompts
+from promptdiff-chiru import compare_prompts
 
 # Your prompts
 P1 = "What are symptoms of diabetes?"
