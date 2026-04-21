@@ -1,26 +1,37 @@
 from runner import run_prompt
 from diff_engine import get_diff
 
+def llm_advice(best_output, question, context):
+    """Get 2-line pointwise explanation from LLM"""
+    judge_prompt = f"""Question: {question}
+
+Context: {context}
+
+Best Answer:
+{best_output}
+
+Provide 2 bullet points why this is the best:
+1. 
+2. 
+
+Keep it concise, practical."""
+
+    result = run_prompt(judge_prompt, "", "")
+    return result
+
 def compare_prompts(prompts, question, context, model="mistral"):
     outputs = []
 
     print("\n🚀 Running Prompt Comparisons...\n")
 
-    # Run prompts
+    
     for i, prompt in enumerate(prompts):
         print(f"\n🔹 Prompt {i+1}")
         output = run_prompt(prompt, question, context, model)
         outputs.append(output)
         print(output)
 
-    # Diff
-    print("\n🧠 DIFF:\n")
-    for i in range(len(outputs)):
-        for j in range(i + 1, len(outputs)):
-            print(f"\n--- P{i+1} vs P{j+1} ---")
-            print(get_diff(outputs[i], outputs[j]))
 
-    # 🔥 Smart scoring
     def smart_score(output):
         score = 0
         output_lower = output.lower()
@@ -53,6 +64,11 @@ def compare_prompts(prompts, question, context, model="mistral"):
     best_index = scores.index(max(scores))
 
     print(f"\n✅ BEST PROMPT: P{best_index+1}")
+
+    # 🤖 LLM ADVICE
+    print("\n💡 WHY THIS IS BEST:\n")
+    advice = llm_advice(outputs[best_index], question, context)
+    print(advice)
 
     # 🔥 RETURN IMPORTANT DATA
     return {

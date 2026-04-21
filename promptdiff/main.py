@@ -1,6 +1,6 @@
 from comparator import compare_prompts
 
-# Example RAG context (like your project)
+
 context = """
 Soil: Dry
 Rain expected tomorrow
