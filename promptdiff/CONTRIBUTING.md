@@ -6,8 +6,8 @@ We love your input! We want to make contributing to promptdiff as easy and trans
 
 1. **Fork and clone the repository**
    ```bash
-   git clone https://github.com/yourusername/promptdiff.git
-   cd promptdiff
+   git clone https://github.com/CHIRABRATA/promt_comparator-.git
+   cd promt_comparator-
    ```
 
 2. **Create a virtual environment**

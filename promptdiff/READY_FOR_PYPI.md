@@ -242,8 +242,8 @@ result = compare_prompts(
     model="mistral"
 )
 
-📖 Full docs: https://github.com/yourusername/promptdiff
-⭐ GitHub: https://github.com/yourusername/promptdiff
+📖 Full docs: https://github.com/CHIRABRATA/promt_comparator-
+⭐ GitHub: https://github.com/CHIRABRATA/promt_comparator-
 
 Happy prompting! 🚀
 ```

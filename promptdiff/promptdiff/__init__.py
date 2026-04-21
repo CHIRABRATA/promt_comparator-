@@ -41,8 +41,8 @@ Features:
     ✅ RAG integration ready
 
 Documentation:
-    https://github.com/yourusername/promptdiff
+    https://github.com/CHIRABRATA/promt_comparator-
 
 GitHub:
-    https://github.com/yourusername/promptdiff
+    https://github.com/CHIRABRATA/promt_comparator-
 """

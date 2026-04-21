@@ -21,8 +21,8 @@ pip install promptdiff
 
 Or from source:
 ```bash
-git clone https://github.com/yourusername/promptdiff.git
-cd promptdiff
+git clone https://github.com/CHIRABRATA/promt_comparator-.git
+cd promt_comparator-
 pip install -e .
 ```
 
@@ -314,8 +314,8 @@ ollama pull mistral
 Contributions welcome! 
 
 ```bash
-git clone https://github.com/yourusername/promptdiff.git
-cd promptdiff
+git clone https://github.com/CHIRABRATA/promt_comparator-.git
+cd promt_comparator-
 pip install -e .[dev]
 pytest
 ```
@@ -330,8 +330,8 @@ Built for prompt engineers, LLM researchers, and RAG practitioners.
 
 ## 📧 Support
 
-- Issues: https://github.com/yourusername/promptdiff/issues
-- Discussions: https://github.com/yourusername/promptdiff/discussions
+- Issues: https://github.com/CHIRABRATA/promt_comparator-/issues
+- Discussions: https://github.com/CHIRABRATA/promt_comparator-/discussions
 
 ---
 

@@ -13,7 +13,7 @@ setup(
     description="Smart prompt comparison & evaluation tool using LLM-as-judge",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/CHIRABRATA/promptdiff",
+    url="https://github.com/CHIRABRATA/promt_comparator-",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 3 - Alpha",

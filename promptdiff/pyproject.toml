@@ -46,10 +46,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/promptdiff"
-Documentation = "https://github.com/yourusername/promptdiff#readme"
-Repository = "https://github.com/yourusername/promptdiff.git"
-Issues = "https://github.com/yourusername/promptdiff/issues"
+Homepage = "https://github.com/CHIRABRATA/promt_comparator-"
+Documentation = "https://github.com/CHIRABRATA/promt_comparator-#readme"
+Repository = "https://github.com/CHIRABRATA/promt_comparator-.git"
+Issues = "https://github.com/CHIRABRATA/promt_comparator-/issues"
 
 [tool.setuptools]
 packages = ["promptdiff"]
